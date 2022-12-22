@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="223" id="MBL-eC-tGd" userLabel="HeaderCell" customClass="HeaderCell" customModule="TemplateOfDealsViewer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="775" height="223"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MBL-eC-tGd" id="AfB-Al-e9F">
+                <rect key="frame" x="0.0" y="0.0" width="775" height="223"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ns-HG-WvX">
+                        <rect key="frame" x="5" y="0.0" width="765" height="20"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Nls-rQ-dqQ">
+                                <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="20"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUG-2q-zf6">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="9QV-xI-1iI"/>
+                                            <constraint firstAttribute="width" constant="20" id="mrc-KV-47C"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="questionmark.app" catalog="system"/>
+                                        <connections>
+                                            <action selector="sortButtonsPressed:" destination="-2" eventType="touchUpInside" id="hfj-uT-5gM"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instrument" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpE-ag-zgb">
+                                        <rect key="frame" x="20" y="0.0" width="167.66666666666666" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5aS-rC-kgZ">
+                                <rect key="frame" x="192.66666666666663" y="0.0" width="187.33333333333337" height="20"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbk-7Q-Kr8">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="21i-QL-IbA"/>
+                                            <constraint firstAttribute="height" constant="20" id="TqO-7C-rfe"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="questionmark.app" catalog="system"/>
+                                        <connections>
+                                            <action selector="sortButtonsPressed:" destination="-2" eventType="touchUpInside" id="Xju-NM-SBd"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xde-6Q-Dmr">
+                                        <rect key="frame" x="20" y="0.0" width="167.33333333333334" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="dyo-Ub-Vc2">
+                                <rect key="frame" x="385" y="0.0" width="187.66666666666663" height="20"/>
+                                <subviews>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cht-U3-qIY">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="I8I-Ob-zTE"/>
+                                            <constraint firstAttribute="height" constant="20" id="vgZ-o0-DcZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="questionmark.app" catalog="system"/>
+                                        <connections>
+                                            <action selector="sortButtonsPressed:" destination="-2" eventType="touchUpInside" id="o3U-ZG-FjE"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBu-ke-ruj">
+                                        <rect key="frame" x="20" y="0.0" width="167.66666666666666" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="2cF-EI-Vhp">
+                                <rect key="frame" x="577.66666666666663" y="0.0" width="187.33333333333337" height="20"/>
+                                <subviews>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dra-S4-2ha">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="K5E-27-IoJ"/>
+                                            <constraint firstAttribute="width" constant="20" id="Pnu-L6-HNU"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="questionmark.app" catalog="system"/>
+                                        <connections>
+                                            <action selector="sortButtonsPressed:" destination="-2" eventType="touchUpInside" id="Fmd-2M-Wkz"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOh-Ta-O1s">
+                                        <rect key="frame" x="20" y="0.0" width="167.33333333333334" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0ns-HG-WvX" firstAttribute="top" secondItem="AfB-Al-e9F" secondAttribute="top" id="5Bu-U2-Goe"/>
+                    <constraint firstItem="0ns-HG-WvX" firstAttribute="leading" secondItem="AfB-Al-e9F" secondAttribute="leading" constant="5" id="JsY-kc-9yJ"/>
+                    <constraint firstAttribute="bottom" secondItem="0ns-HG-WvX" secondAttribute="bottom" id="Uqx-wc-2mA"/>
+                    <constraint firstAttribute="trailing" secondItem="0ns-HG-WvX" secondAttribute="trailing" constant="5" id="jwx-82-zvo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="amountTitleLabel" destination="VBu-ke-ruj" id="rRf-xU-bJE"/>
+                <outlet property="instrumentNameTitlLabel" destination="EpE-ag-zgb" id="zKp-K1-izM"/>
+                <outlet property="priceTitleLabel" destination="Xde-6Q-Dmr" id="C6u-E8-nHA"/>
+                <outlet property="sideTitleLabel" destination="nOh-Ta-O1s" id="ntq-vY-Ctv"/>
+                <outletCollection property="sortButtons" destination="dUG-2q-zf6" collectionClass="NSMutableArray" id="Vjh-Qy-QBi"/>
+                <outletCollection property="sortButtons" destination="qbk-7Q-Kr8" collectionClass="NSMutableArray" id="ui2-zu-Ytc"/>
+                <outletCollection property="sortButtons" destination="cht-U3-qIY" collectionClass="NSMutableArray" id="pZf-NG-9jU"/>
+                <outletCollection property="sortButtons" destination="Dra-S4-2ha" collectionClass="NSMutableArray" id="h7j-u4-F1q"/>
+            </connections>
+            <point key="canvasLocation" x="274.61538461538458" y="107.70142180094786"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="questionmark.app" catalog="system" width="128" height="114"/>
+    </resources>
+</document>
