@@ -5,14 +5,41 @@ enum SortParameter: Int {
     case price = 1
     case amount = 2
     case side = 3
+    case date
 }
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController, HeaderDelegate {
+    
+    private let queue = DispatchQueue(label: "queue")
+    private let changeSortQueue = DispatchQueue(label: "changeSortQueue")
     
     private let server = Server()
-    private var model: [Deal] = []
+    private var serverModel: [Deal] = []
     
+    private var model: [Deal] = []
     private var dataSource: [Deal] = []
+    
+    private var reversed = false
+    private var sortParameter: SortParameter = .date {
+        didSet {
+            self.startAnimating()
+            self.changeSortQueue.async {
+                self.model = self.sort(self.serverModel, parameter: self.sortParameter, reversed: self.reversed)
+                let count = self.dataSource.count == 0 ? 99 : self.dataSource.count - 1
+                if count < self.model.count {
+                    self.dataSource = Array(self.model[0...count])
+                } else {
+                    self.dataSource = []
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                    self.stopAnimating()
+                    self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
+            }
+        }
+    }
     
     @IBOutlet private weak var loader: UIActivityIndicatorView?
     @IBOutlet private weak var tableView: UITableView?
@@ -23,18 +50,28 @@ final class ViewController: UIViewController {
         navigationItem.title = "Deals"
         setup()
         
-        startAnimating()
-        
         server.subscribeToDeals { deals in
-            self.model.append(contentsOf: deals)
-        } completion: {
-            self.model = self.initialSort(array: self.model)
-            self.dataSource = Array(self.model[0...99])
-            DispatchQueue.main.async {
-                self.stopAnimating()
-                self.tableView?.reloadData()
+            self.serverModel.append(contentsOf: deals)
+            
+            self.queue.async {
+                self.model = self.sort(self.serverModel, parameter: self.sortParameter, reversed: self.reversed)
+                let count = self.dataSource.count == 0 ? 99 : self.dataSource.count - 1
+                if count < self.model.count {
+                    self.dataSource = Array(self.model[0...count])
+                } else {
+                    self.dataSource = []
+                }
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                }
             }
+            
         }
+    }
+    
+    func changeSort(parameter: SortParameter, reversed: Bool) {
+        self.sortParameter = parameter
+        self.reversed = reversed
     }
     
     private func setup() {
@@ -45,63 +82,47 @@ final class ViewController: UIViewController {
     }
     
     private func startAnimating() {
-        DispatchQueue.main.async {
-            self.loader?.startAnimating()
-            self.tableView?.isHidden = true
-        }
+        self.loader?.startAnimating()
+        self.tableView?.isHidden = true
     }
     
     private func stopAnimating() {
-        DispatchQueue.main.async {
-            self.loader?.stopAnimating()
-            self.tableView?.isHidden = false
-        }
+        self.loader?.stopAnimating()
+        self.tableView?.isHidden = false
     }
     
-    private func initialSort(array: [Deal]) -> [Deal] {
-        return array.sorted(by: { $0.dateModifier.compare($1.dateModifier) == .orderedAscending } )
+    private func sort(_ array: [Deal], parameter: SortParameter, reversed: Bool) -> [Deal] {
+        if reversed {
+            switch parameter {
+            case .price:
+                return array.sorted(by: { $0.price > $1.price })
+            case .instrumentName:
+                return array.sorted(by: { $0.instrumentName > $1.instrumentName })
+            case .amount:
+                return array.sorted(by: { $0.amount > $1.amount })
+            case .side:
+                return array.sorted(by: { $0.side > $1.side })
+            case .date:
+                return array.sorted(by: { $0.dateModifier.compare($1.dateModifier) == .orderedDescending })
+            }
+        } else {
+            switch parameter {
+            case .price:
+                return array.sorted(by: {$0.price < $1.price })
+            case .instrumentName:
+                return array.sorted(by: { $0.instrumentName < $1.instrumentName })
+            case .amount:
+                return array.sorted(by: { $0.amount < $1.amount })
+            case .side:
+                return array.sorted(by: { $0.side < $1.side })
+            case .date:
+                return array.sorted(by: { $0.dateModifier.compare($1.dateModifier) == .orderedAscending })
+            }
+        }
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate, HeaderDelegate {
-    
-    func sort(parameter: SortParameter, reversed: Bool) {
-        let queue = DispatchQueue(label: "sort")
-        queue.async {
-            self.startAnimating()
-            if reversed {
-                switch parameter {
-                case .price:
-                    self.model = self.model.sorted(by: { $0.price > $1.price })
-                case .instrumentName:
-                    self.model = self.model.sorted(by: { $0.instrumentName > $1.instrumentName })
-                case .amount:
-                    self.model = self.model.sorted(by: { $0.amount > $1.amount })
-                case .side:
-                    self.model = self.model.sorted(by: { $0.side > $1.side })
-                }
-            } else {
-                switch parameter {
-                case .price:
-                    self.model = self.model.sorted(by: { $0.price < $1.price })
-                case .instrumentName:
-                    self.model = self.model.sorted(by: { $0.instrumentName < $1.instrumentName })
-                case .amount:
-                    self.model = self.model.sorted(by: { $0.amount < $1.amount })
-                case .side:
-                    self.model = self.model.sorted(by: { $0.side < $1.side })
-                }
-            }
-            
-            self.dataSource = Array(self.model[0...99])
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.tableView?.reloadData()
-                self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-                self.stopAnimating()
-            }
-        }
-    }
-    
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

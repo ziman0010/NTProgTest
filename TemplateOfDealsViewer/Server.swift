@@ -19,7 +19,7 @@ final class Server {
     "EUR/USD_TN"
   ]
   
-    func subscribeToDeals(callback: @escaping ([Deal]) -> Void, completion: @escaping () -> Void) {
+  func subscribeToDeals(callback: @escaping ([Deal]) -> Void) {
     queue.async {
       var deals: [Deal] = []
       let dealsCount = Int64.random(in: 1_000_000..<1_001_000)
@@ -42,15 +42,15 @@ final class Server {
         
         if j == dealsCountInPacket || i == dealsCount {
           j = 0
-          let delay = Double.random(in: 0...3)
+          let delay = UInt32.random(in: 0...300_000)
+          usleep(delay)
           let newDeals = deals
-          DispatchQueue.main.asyncAfter(deadline: .now()+delay) {
+          DispatchQueue.main.async {
             callback(newDeals)
           }
           deals = []
         }
       }
-        completion()
     }
     
   }

@@ -8,7 +8,7 @@ enum SortState {
 
 protocol HeaderDelegate: AnyObject {
     
-    func sort(parameter: SortParameter, reversed: Bool)
+    func changeSort(parameter: SortParameter, reversed: Bool)
 }
 
 final class HeaderCell: UITableViewHeaderFooterView {
@@ -37,15 +37,15 @@ final class HeaderCell: UITableViewHeaderFooterView {
         switch states[sender.tag] {
         case .unknown:
             states = [.unknown, .unknown, .unknown, .unknown]
-            delegate?.sort(parameter: parameter, reversed: false)
+            delegate?.changeSort(parameter: parameter, reversed: false)
             states[sender.tag] = .normal
             sortButtons[sender.tag].setImage(UIImage(systemName: "arrow.up"), for: .normal)
         case .reversed:
-            delegate?.sort(parameter: parameter, reversed: false)
+            delegate?.changeSort(parameter: parameter, reversed: false)
             states[sender.tag] = .normal
             sortButtons[sender.tag].setImage(UIImage(systemName: "arrow.up"), for: .normal)
         case .normal:
-            delegate?.sort(parameter: parameter, reversed: true)
+            delegate?.changeSort(parameter: parameter, reversed: true)
             states[sender.tag] = .reversed
             sortButtons[sender.tag].setImage(UIImage(systemName: "arrow.down"), for: .normal)
         }

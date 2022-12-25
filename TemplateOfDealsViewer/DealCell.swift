@@ -15,7 +15,7 @@ final class DealCell: UITableViewCell {
     
     func set(model: Deal) {
         let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         dateLabel?.text = df.string(from: model.dateModifier)
         instrumentNameLabel?.text = model.instrumentName
